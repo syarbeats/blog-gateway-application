@@ -1,5 +1,7 @@
 package com.mitrais.cdc.security.jwt;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -22,6 +24,8 @@ public class JWTFilter extends GenericFilterBean {
 
     public static final String AUTHORIZATION_TOKEN = "access_token";
 
+    private final Logger log = LoggerFactory.getLogger(JWTFilter.class);
+
     private TokenProvider tokenProvider;
 
     public JWTFilter(TokenProvider tokenProvider) {
@@ -32,10 +36,21 @@ public class JWTFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
         throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+
+        log.info("SERVLET INTERCEPTOR FOR INCOMING REQUEST");
+
         String jwt = resolveToken(httpServletRequest);
+
+        log.info("GET TOKEN FROM SERVICE REQUEST:", jwt);
+
         if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
+
+            log.info("TOKEN IS VALID");
+
             Authentication authentication = this.tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            log.info("SET SECURITY CONTEXT");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -44,6 +44,9 @@ public class TokenProvider implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         byte[] keyBytes;
         String secret = jHipsterProperties.getSecurity().getAuthentication().getJwt().getSecret();
+
+        log.info("GET-SECRET-KEY:", secret);
+
         if (!StringUtils.isEmpty(secret)) {
             log.warn("Warning: the JWT key used is not Base64-encoded. " +
                 "We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security.");
@@ -61,6 +64,9 @@ public class TokenProvider implements InitializingBean {
     }
 
     public String createToken(Authentication authentication, boolean rememberMe) {
+
+        log.info("CREATE-TOKEN:", authentication.isAuthenticated());
+
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
@@ -82,6 +88,9 @@ public class TokenProvider implements InitializingBean {
     }
 
     public Authentication getAuthentication(String token) {
+
+        log.info("Get User Authentication");
+
         Claims claims = Jwts.parser()
             .setSigningKey(key)
             .parseClaimsJws(token)
@@ -98,6 +107,9 @@ public class TokenProvider implements InitializingBean {
     }
 
     public boolean validateToken(String authToken) {
+
+        log.info("VALIDATE-TOKEN");
+
         try {
             Jwts.parser().setSigningKey(key).parseClaimsJws(authToken);
             return true;
