@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mitrais.cdc"
+    },
+    "jhipsterVersion": "6.1.2",
+    "applicationType": "gateway",
+    "baseName": "ApplicationGateway",
+    "packageName": "com.mitrais.cdc",
+    "packageFolder": "com/mitrais/cdc",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MDg1YzRlYWE4MDE3ZTY3M2RiOGNkZTQzOWZlNWE0YTRiYTcyYTE0YzBiNDE3YWFmNjJiMGE5ZmQxZmJkZDQ4YjNlYzk1YjRjOTJlMDQ0YTI5MTkyMzY3OGM0ZThmZTY2MDc1N2I5Yzc4MWNkMGFkN2I5M2Q1ZGQ3NzhmZjgxMjU=",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "cosmo",
+    "clientThemeVariant": "primary",
+    "testFrameworks": [
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
